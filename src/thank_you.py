@@ -3,19 +3,20 @@ import os
 import sys
 
 """won't implement clearing screen yet for debugging"""
-# def clear_screen():
-#     """Taken from the Treehouse shopping_list exercise."""
-#     os.system("cls" if os.name == "nt" else "clear")
+def clear_screen():
+    """Taken from the Treehouse shopping_list exercise."""
+    os.system("cls" if os.name == "nt" else "clear")
 
 
-list_of_donor_names = {'Sam Wippy': [100000], 'Willy Wonka': [12, 13, 14], 'Garth Brooks': [1]}
+donors_info = {'Sam Wippy': [100000], 'Willy Wonka': [12, 13, 14], 'Garth Brooks': [1]}
 
 
 
 def send_thank_you():
     """Give user choices to send a thank you note to a donor."""
-    # clear_screen()
+    clear_screen()
     while True:
+        # clear_screen()
         full_name = input(
             """Enter the full name of the person you'd like to send a thank you to. Or:
         [L] to see a list of previous donors.
@@ -27,7 +28,7 @@ def send_thank_you():
         elif full_name == 'b':
             break
         elif full_name == 'l':
-            for key in sorted(list_of_donor_names.keys()):
+            for key in sorted(donors_info.keys()):
                 print(key)
         else:
             full_name_not_in_list(full_name)
@@ -35,37 +36,58 @@ def send_thank_you():
 
 
 def full_name_not_in_list(full_name):
-    if full_name not in [key.lower() for key in list_of_donor_names.keys()]:
-        list_of_donor_names[full_name.title()] = []
+    clear_screen()
+    if full_name not in [key.lower() for key in donors_info.keys()]:
+        donors_info[full_name.title()] = []
     while True:
         donation_amount = input("Enter donation amount: ")
         try:
             donation_amount = int(donation_amount)
-            list_of_donor_names[full_name.title()].append(
+            donors_info[full_name.title()].append(
                 donation_amount)
-            print('Added {1} to {0}\'s donation history.'.format(
+            print('Added ${1} to {0}\'s donation history.'.format(
                 full_name.title(), donation_amount))
             break
         except ValueError:
+            clear_screen()
             print("Please enter a valid, numerical donation amount.")
             continue
-    print('''Email sent:
-{name},\n Thank you for your generous donation of ${amount}.
-Your donation goes toward accomplishing really cool shit at this place.'''.format(
-            name=full_name.title(),
-            amount=list_of_donor_names[full_name.title()][-1]))
-    send_thank_you()
+    print("")
+    print('''Email body:''')
+    print('''{name}, '''.format(
+                name=full_name.title()))
+    print("")
+    print('''Thank you for your generous donation of ${amount}.
+        Your donation goes toward accomplishing really cool shit at this place.'''.format(
+            amount=donors_info[full_name.title()][-1]))
+    print("")
+    print("Sincerely,")
+    print("")
+    print("The Pants Foundation")
+    print("")
+    print("")
+    # send_thank_you()
 
 
 def create_report():
-    print('poop!')
+    clear_screen()
+    """making a list for each row first"""
+    title_row = ["Donor_Name", "Total_Donation", "Number_of_Donation", "Average_Donation"]
+    donor_name = donors_info.keys()
+    donation = donors_info.values()
+    num_of_donation = [str(len(a)) for a in donation]
+    total_donation = [str(sum(a)) for a in donation]
+    average_donation = [str(sum(a)/len(a)) for a in donation]
+    for row in zip(donor_name, total_donation, num_of_donation, average_donation):
+        print(', '.join(row))
 
 
 while True:
+    # clear_screen()
     user_menu = input(
         """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:
     [E] to EMAIL an existing donor or new donor.
-    [R] to print a REPORT of donors and their donations.
+    [R] for REPORT of donors and their donations.
     [Q] to quit the program.
     > """).lower()
     if user_menu.lower() == "q":
