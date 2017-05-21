@@ -10,18 +10,7 @@ import sys
 
 list_of_donor_names = {'Sam Wippy': [100000], 'Willy Wonka': [12, 13, 14], 'Garth Brooks': [1]}
 
-while True:
-    user_menu = input("Type EMAIL, REPORT, or QUIT >")
 
-    if user_menu.lower() == "quit":
-        break
-
-    elif user_menu.lower() == "email":
-        send_thank_you()
-        continue
-    elif user_menu.lower() == "report":
-        create_report()
-        continue
 
 def send_thank_you():
     """Give user choices to send a thank you note to a donor."""
@@ -42,6 +31,7 @@ def send_thank_you():
                 print(key)
         else:
             full_name_not_in_list(full_name)
+
 
 
 def full_name_not_in_list(full_name):
@@ -65,3 +55,24 @@ Your donation goes toward accomplishing really cool shit at this place.'''.forma
             name=full_name.title(),
             amount=list_of_donor_names[full_name.title()][-1]))
     send_thank_you()
+
+
+def create_report():
+    print('poop!')
+
+
+while True:
+    user_menu = input(
+        """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:
+    [E] to EMAIL an existing donor or new donor.
+    [R] to print a REPORT of donors and their donations.
+    [Q] to quit the program.
+    > """).lower()
+    if user_menu.lower() == "q":
+        break
+    elif user_menu.lower() == "e":
+        send_thank_you()
+        continue
+    elif user_menu.lower() == "r":
+        create_report()
+        continue
