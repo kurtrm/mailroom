@@ -3,14 +3,14 @@ from setuptools import setup
 
 dependencies = ['ipython', 'pytest']
 extra_packages = {
-    'testing': ['pytest', 'pytest-watch', 'pytest-cov']
+    'testing': ['pytest', 'pytest-watch', 'pytest-cov', 'tox']
 }
 
 setup(
     name='mailroom',
     description="Sends automatic emails to donors.",
     version=0.1,
-    author='Kurt', 'Lynn'
+    author='Kurt, Lynn, and David',
     author_email='',
     license='MIT',
     py_modules=['mailroom'],
