@@ -6,6 +6,7 @@ donors_info = {'Sam Wippy': [100000], 'Willy Wonka': [12, 13, 14], 'Garth Brooks
 
 def create_report():
     """making a list for each column from dict data then populate row data into a table"""
+    donor_list = [] # For tests
     donor_name = donors_info.keys()
     donor_name.insert(0, "Donor_Name")
     donation = donors_info.values()
@@ -17,7 +18,5 @@ def create_report():
     average_donation.insert(0, "Average_Donation")
     for row in zip(donor_name, total_donation, num_of_donation, average_donation):
         print '\t '.join(row)
-
-
-
-
+        donor_list.append(', '.join(row)) # For tests
+    return sorted(donor_list) # For tests
