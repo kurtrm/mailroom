@@ -69,7 +69,7 @@ def full_name_not_in_list(full_name):
     # send_thank_you()
 
 
-def create_report():
+def create_report(donors_info):
     clear_screen()
     """making a list for each row first"""
     title_row = ["Donor_Name", "Total_Donation", "Number_of_Donation", "Average_Donation"]
@@ -77,7 +77,7 @@ def create_report():
     donation = donors_info.values()
     num_of_donation = [str(len(a)) for a in donation]
     total_donation = [str(sum(a)) for a in donation]
-    average_donation = [str(sum(a)/len(a)) for a in donation]
+    average_donation = [str(sum(a) / len(a)) for a in donation]
     for row in zip(donor_name, total_donation, num_of_donation, average_donation):
         print(', '.join(row))
 
