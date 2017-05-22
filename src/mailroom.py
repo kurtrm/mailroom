@@ -2,14 +2,13 @@
 import os
 import sys
 
-"""won't implement clearing screen yet for debugging"""
+
 def clear_screen():
     """Taken from the Treehouse shopping_list exercise."""
     os.system("cls" if os.name == "nt" else "clear")
 
 
 donors_info = {'Sam Wippy': [100000], 'Willy Wonka': [12, 13, 14], 'Garth Brooks': [1]}
-
 
 
 def send_thank_you():
@@ -32,7 +31,6 @@ def send_thank_you():
                 print(key)
         else:
             full_name_not_in_list(full_name)
-
 
 
 def full_name_not_in_list(full_name):
@@ -66,7 +64,6 @@ def full_name_not_in_list(full_name):
     print("The Pants Foundation")
     print("")
     print("")
-    # send_thank_you()
 
 
 def create_report(donors_info):
@@ -90,22 +87,20 @@ def create_report(donors_info):
             row[3], ' ' * (30 - len(str(row[3])))))
 
 
-while True:
-    # clear_screen()
-    user_menu = input(
-        """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:
-    [E] to EMAIL an existing donor or new donor.
-    [R] for REPORT of donors and their donations.
-    [Q] to quit the program.
-    > """)
-    if user_menu.lower() == 'q':
-        break
-    elif user_menu.lower() == 'e':
-        send_thank_you()
-        continue
-    elif user_menu.lower() == 'r':
-        create_report(donors_info)
-        continue
-
-
-
+if __main__ = '__name__':
+    while True:
+        # clear_screen()
+        user_menu = input(
+            """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:
+        [E] to EMAIL an existing donor or new donor.
+        [R] for REPORT of donors and their donations.
+        [Q] to quit the program.
+        > """)
+        if user_menu.lower() == 'q':
+            break
+        elif user_menu.lower() == 'e':
+            send_thank_you()
+            continue
+        elif user_menu.lower() == 'r':
+            create_report(donors_info)
+            continue
