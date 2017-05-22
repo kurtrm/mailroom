@@ -69,19 +69,25 @@ def full_name_not_in_list(full_name):
     # send_thank_you()
 
 
-def create_report():
+def create_report(donors_info):
     """making a list for each column from dict data then populate row data into a table"""
     donor_name = list(donors_info.keys())
-    donor_name.insert(0, "Donor_Name")
     donation = donors_info.values()
-    num_of_donation = [str(len(a)) for a in donation]
-    num_of_donation.insert(0, "Number_of_Donation")
-    total_donation = [str(sum(a)) for a in donation]
-    total_donation.insert(0, "Total_Donation")
-    average_donation = [str(sum(a)/len(a)) for a in donation]
-    average_donation.insert(0, "Average_Donation")
-    for row in zip(donor_name, total_donation, num_of_donation, average_donation):
-        print('\t '.join(row))
+    num_of_donation = [len(a) for a in donation]
+    total_donation = [sum(a) for a in donation]
+    average_donation = [sum(a)/len(a) for a in donation]
+    sorted_donations = sorted(list(zip(donor_name, total_donation, num_of_donation, average_donation)), key=lambda tup: tup[1], reverse=True)
+    print("\nDonor Name{}Total Amount{}Number of Donations{}Average Donation Amount{}".format(
+        ' ' * 20,
+        ' ' * 18,
+        ' ' * 11,
+        ' ' * 8))
+    for row in sorted_donations:
+        print('{}{}{}{}{}{}{}{}\n'.format(
+            row[0], ' ' * (30 - len(str(row[0]))),
+            row[1], ' ' * (30 - len(str(row[1]))),
+            row[2], ' ' * (30 - len(str(row[2]))),
+            row[3], ' ' * (30 - len(str(row[3])))))
 
 
 while True:
@@ -98,7 +104,7 @@ while True:
         send_thank_you()
         continue
     elif user_menu.lower() == 'r':
-        create_report()
+        create_report(donors_info)
         continue
 
 
