@@ -71,7 +71,7 @@ def full_name_not_in_list(full_name):
 
 def create_report():
     """making a list for each column from dict data then populate row data into a table"""
-    donor_name = donors_info.keys()
+    donor_name = list(donors_info.keys())
     donor_name.insert(0, "Donor_Name")
     donation = donors_info.values()
     num_of_donation = [str(len(a)) for a in donation]
@@ -81,7 +81,7 @@ def create_report():
     average_donation = [str(sum(a)/len(a)) for a in donation]
     average_donation.insert(0, "Average_Donation")
     for row in zip(donor_name, total_donation, num_of_donation, average_donation):
-        print '\t '.join(row)
+        print('\t '.join(row))
 
 
 while True:
