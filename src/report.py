@@ -13,8 +13,21 @@ def create_report(donors_info):
     total_donation = [sum(a) for a in donation]
     average_donation = [sum(a)/len(a) for a in donation]
     sorted_donations = sorted(list(zip(donor_name, total_donation, num_of_donation, average_donation)), key=lambda tup: tup[1], reverse=True)
-    print("Donor Name\t Total Amount\t Number of Donations\t Average Donation Amount")
+    print("Donor Name{}Total Amount{}Number of Donations{}Average Donation Amount{}".format(
+        ' ' * 20,
+        ' ' * 18,
+        ' ' * 10,
+        ' ' * 8))
     for row in sorted_donations:
-        print('{}\t {}\t {}\t {}'.format(row[0], row[1], row[2], row[3]))
-        donor_list.append('{}\t {}\t {}\t {}'.format(row[0], row[1], row[2], row[3])) # For tests
+        print('{}{}{}{}{}{}{}{}'.format(
+            row[0], ' ' * (30 - len(str(row[0]))),
+            row[1], ' ' * (30 - len(str(row[1]))),
+            row[2], ' ' * (30 - len(str(row[2]))),
+            row[3], ' ' * (30 - len(str(row[3])))))
+        donor_list.append('{}\t {}\t {}\t {}'.format(
+        row[0],
+        row[1],
+        row[2],
+        row[3])
+        ) # For tests
     return sorted(donor_list) # For tests
