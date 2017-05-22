@@ -16,7 +16,7 @@ def create_report(donors_info):
     print("Donor Name{}Total Amount{}Number of Donations{}Average Donation Amount{}".format(
         ' ' * 20,
         ' ' * 18,
-        ' ' * 10,
+        ' ' * 11,
         ' ' * 8))
     for row in sorted_donations:
         print('{}{}{}{}{}{}{}{}'.format(
