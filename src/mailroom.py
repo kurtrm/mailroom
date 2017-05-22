@@ -8,7 +8,11 @@ def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 
-donors_info = {'Sam Wippy': [100000], 'Willy Wonka': [12, 13, 14], 'Garth Brooks': [1]}
+donors_info = {
+    'Sam Wippy': [100000],
+    'Willy Wonka': [12, 13, 14],
+    'Garth Brooks': [1]
+}
 
 
 def send_thank_you():
@@ -34,6 +38,7 @@ def send_thank_you():
 
 
 def full_name_not_in_list(full_name):
+    """Take care of managing user input into our data table."""
     clear_screen()
     if full_name not in [key.lower() for key in donors_info.keys()]:
         donors_info[full_name.title()] = []
@@ -52,12 +57,15 @@ def full_name_not_in_list(full_name):
             continue
     print("")
     print('''Email body:''')
-    print('''{name}, '''.format(
-                name=full_name.title()))
+    print('''{name}, '''
+          .format(
+              name=full_name.title()))
     print("")
     print('''Thank you for your generous donation of ${amount}.
-        Your donation goes toward accomplishing really cool shit at this place.'''.format(
-            amount=donors_info[full_name.title()][-1]))
+        Your donation goes toward accomplishing really cool shit at this place.
+        '''
+          .format(
+              amount=donors_info[full_name.title()][-1]))
     print("")
     print("Sincerely,")
     print("")
@@ -67,29 +75,42 @@ def full_name_not_in_list(full_name):
 
 
 def create_report(donors_info):
-    """making a list for each column from dict data then populate row data into a table"""
+    """Make a list for each column from dict data then populate
+    row data into a table.
+    """
     donor_name = list(donors_info.keys())
     donation = donors_info.values()
     num_of_donation = [len(a) for a in donation]
     total_donation = [sum(a) for a in donation]
-    average_donation = [sum(a)/len(a) for a in donation]
-    sorted_donations = sorted(list(zip(donor_name, total_donation, num_of_donation, average_donation)), key=lambda tup: tup[1], reverse=True)
-    print("\nDonor Name{}Total Amount{}Number of Donations{}Average Donation Amount{}".format(
-        ' ' * 20,
-        ' ' * 18,
-        ' ' * 11,
-        ' ' * 8))
+    average_donation = [int(sum(a) / len(a)) for a in donation]
+    sorted_donations = sorted(list(zip(
+        donor_name,
+        total_donation,
+        num_of_donation,
+        average_donation)), key=lambda tup: tup[1], reverse=True)
+    clear_screen()
+    print(
+        "\nDonor Name{}"
+        "Total Amount{}"
+        "Number of Donations{}"
+        "Average Donation Amount{}"
+        .format(
+            ' ' * 20,
+            ' ' * 18,
+            ' ' * 11,
+            ' ' * 8
+        ))
     for row in sorted_donations:
-        print('{}{}{}{}{}{}{}{}\n'.format(
+        print('{}{}{}{}{}{}{}{}'.format(
             row[0], ' ' * (30 - len(str(row[0]))),
             row[1], ' ' * (30 - len(str(row[1]))),
             row[2], ' ' * (30 - len(str(row[2]))),
             row[3], ' ' * (30 - len(str(row[3])))))
+    print('\n')
 
 
-if __main__ = '__name__':
+if __name__ == '__main__':
     while True:
-        # clear_screen()
         user_menu = input(
             """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:
         [E] to EMAIL an existing donor or new donor.
