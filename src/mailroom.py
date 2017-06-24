@@ -125,7 +125,8 @@ def create_report(donors_info):  # pragma no cover
     print('\n')
 
 
-if __name__ == '__main__':  # pragma no cover
+def main():  # pragma no cover
+    """The main function."""
     while True:
         user_menu = input(
             """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:
@@ -141,3 +142,7 @@ if __name__ == '__main__':  # pragma no cover
         elif user_menu.lower() == 'r':
             create_report(donors_info)
             continue
+
+
+if __name__ == '__main__':  # pragma no cover
+    main()
