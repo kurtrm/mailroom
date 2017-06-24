@@ -10,7 +10,7 @@ setup(
     name='mailroom',
     description="Sends automatic emails to donors.",
     version=0.1,
-    author='Kurt, Lynn, and David',
+    author='Kurt and David',
     author_email='',
     license='MIT',
     py_modules=['mailroom'],

@@ -3,7 +3,7 @@ import os
 import sys
 
 
-def clear_screen():
+def clear_screen():  # pragma no cover
     """Taken from the Treehouse shopping_list exercise."""
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -15,11 +15,10 @@ donors_info = {
 }
 
 
-def send_thank_you():
+def send_thank_you():  # pragma no cover
     """Give user choices to send a thank you note to a donor."""
     clear_screen()
     while True:
-        # clear_screen()
         full_name = input(
             """Enter the full name of the person you'd like to send a thank you to. Or:
         [L] to see a list of previous donors.
@@ -37,7 +36,7 @@ def send_thank_you():
             full_name_not_in_list(full_name)
 
 
-def full_name_not_in_list(full_name):
+def full_name_not_in_list(full_name):  # pragma no cover
     """Take care of managing user input into our data table."""
     clear_screen()
     if full_name not in [key.lower() for key in donors_info.keys()]:
@@ -55,29 +54,44 @@ def full_name_not_in_list(full_name):
             clear_screen()
             print("Please enter a valid, numerical donation amount.")
             continue
-    print("""==================================
-
-    EMAIL BODY:
-
+    print("""
+    ==================================
 
     Dear {name},
 
-    Thank you for your generous donation of ${amount}. We have so many things that we have to do better... and certainly ipsum is one of them. Lorem Ispum is a choke artist. It chokes! I think my strongest asset maybe by far is my temperament. I have a placeholding temperament.
+    Thank you for your generous donation of ${amount}. We have so many things
+    that we have to do better... and certainly ipsum is one of them.
+    Lorem Ispum is a choke artist. It chokes! I think my strongest asset maybe
+    by far is my temperament. I have a placeholding temperament.
 
-    Your donation of ${amount} goes toward accomplishing really cool shit at this place. Lorem Ipsum is the single greatest threat. We are not - we are not keeping up with other websites. When other websites give you text, they’re not sending the best. They’re not sending you, they’re sending words that have lots of problems and they’re bringing those problems with us. They’re bringing mistakes. They’re bringing misspellings.
+    Your donation of ${amount} goes toward accomplishing really cool shit at
+    this place. Lorem Ipsum is the single greatest threat.
+    We are not - we are not keeping up with other websites. When other websites
+    give you text, they’re not sending the best. They’re not sending you,
+    they’re sending words that have lots of problems and they’re bringing
+    those problems with us. They’re bringing mistakes.
+    They’re bringing misspellings.
 
-    {name}, they’re typists… And some, I assume, are good words. An ‘extremely credible source’ has called my office and told me that Barack Obama’s placeholder text is a fraud. I think the only difference between me and the other placeholder text is that I’m more honest and my words are more beautiful. If Trump Ipsum weren’t my own words, perhaps I’d be dating it.
+    {name}, they’re typists… And some, I assume, are good words.
+    An ‘extremely credible source’ has called my office and told me that Barack
+    Obama’s placeholder text is a fraud. I think the only difference between
+    me and the other placeholder text is that I’m more honest and my words are
+    more beautiful. If Trump Ipsum weren’t my own words, perhaps I’d be dating
+    it.
 
     Sincerely,
 
 
     The Pants Foundation
 
-    ==================================""".format(name=full_name.title(), amount=donors_info[full_name.title()][-1]))
+    ==================================""".format(name=full_name.title(),
+                                                 amount=donors_info[full_name
+                                                 .title()][-1]))
 
 
-def create_report(donors_info):
+def create_report(donors_info):  # pragma no cover
     """Make a list for each column from dict data then populate
+
     row data into a table.
     """
     donor_name = list(donors_info.keys())
@@ -111,7 +125,7 @@ def create_report(donors_info):
     print('\n')
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma no cover
     while True:
         user_menu = input(
             """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:
