@@ -12,7 +12,7 @@ donors_info = {
 #  not worth diving into tests for.
 
 
-def full_name_not_in_list(full_name, test_var):
+def add_new_or_update_donor_info(full_name, test_var):
     """Take care of managing user input into our data table."""
     if full_name not in [key.lower() for key in donors_info.keys()]:
         donors_info[full_name.title()] = []

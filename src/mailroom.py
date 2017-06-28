@@ -33,10 +33,10 @@ def send_thank_you():  # pragma no cover
             for key in sorted(donors_info.keys()):
                 print(key)
         else:
-            full_name_not_in_list(full_name)
+            add_new_or_update_donar_info(full_name)
 
 
-def full_name_not_in_list(full_name):  # pragma no cover
+def add_new_or_update_donor_info(full_name):  # pragma no cover
     """Take care of managing user input into our data table."""
     clear_screen()
     if full_name not in [key.lower() for key in donors_info.keys()]:
@@ -45,6 +45,10 @@ def full_name_not_in_list(full_name):  # pragma no cover
         donation_amount = input("Enter donation amount: ")
         try:
             donation_amount = int(donation_amount)
+            if donation_amount < 0:
+                clear_screen()
+                print("Please enter a positive donation amount.")
+                continue
             donors_info[full_name.title()].append(
                 donation_amount)
             print('Added ${1} to {0}\'s donation history.'.format(
@@ -52,7 +56,7 @@ def full_name_not_in_list(full_name):  # pragma no cover
             break
         except ValueError:
             clear_screen()
-            print("Please enter a valid, numerical donation amount.")
+            print("Please enter a positive, numerical donation amount.")
             continue
     print("""
     ==================================

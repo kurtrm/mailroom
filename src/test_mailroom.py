@@ -28,13 +28,13 @@ def test_create_report(l, result):
     assert create_report(l) == result
 
 
-def test_full_name_not_in_list_success():
+def test_add_new_or_update_donor_info_success():
     """Test parts of this function."""
-    from mailroom_tests import full_name_not_in_list
-    assert full_name_not_in_list("Jacob Brinkley", 200) == list_result
+    from mailroom_tests import add_new_or_update_donor_info
+    assert add_new_or_update_donor_info("Jacob Brinkley", 200) == list_result
 
 
-def test_full_name_not_in_list_fail():
+def test_add_new_or_update_donor_info_fail():
     """Test parts of this function."""
-    from mailroom_tests import full_name_not_in_list
-    assert full_name_not_in_list("jeepers", "Cool Whip") is None
+    from mailroom_tests import add_new_or_update_donor_info
+    assert add_new_or_update_donor_info("jeepers", "Cool Whip") is None
