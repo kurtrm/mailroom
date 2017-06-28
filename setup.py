@@ -1,9 +1,10 @@
+"""Setup for mailroom."""
 from setuptools import setup
 
 
 dependencies = ['ipython', 'pytest']
 extra_packages = {
-    'testing': ['pytest', 'pytest-watch', 'pytest-cov', 'tox']
+    'testing': ['pytest-cov', 'tox']
 }
 
 setup(

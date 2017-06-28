@@ -3,7 +3,7 @@ import os
 import sys
 
 
-def clear_screen():  # pragma no cover
+def clear_screen():
     """Taken from the Treehouse shopping_list exercise."""
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -15,16 +15,16 @@ donors_info = {
 }
 
 
-def send_thank_you():  # pragma no cover
+def send_thank_you():
     """Give user choices to send a thank you note to a donor."""
     clear_screen()
     while True:
-        full_name = input(
-            """Enter the full name of the person you'd like to send a thank you to. Or:
-        [L] to see a list of previous donors.
-        [B] 'back' to return to the main menu.
-        [Q] to quit the program.
-        > """).lower()
+        full_name = input("""
+Enter the full name of the person you'd like to send a thank you to. Or:
+[L] to see a list of previous donors.
+[B] to return to the main menu.
+[Q] to quit the program.
+> """).lower()
         if full_name == 'q':
             sys.exit()
         elif full_name == 'b':
@@ -33,22 +33,24 @@ def send_thank_you():  # pragma no cover
             for key in sorted(donors_info.keys()):
                 print(key)
         else:
-            add_new_or_update_donar_info(full_name)
+            add_new_or_update_donor_info(full_name)
 
 
-def add_new_or_update_donor_info(full_name):  # pragma no cover
+def add_new_or_update_donor_info(full_name):
     """Take care of managing user input into our data table."""
     clear_screen()
-    if full_name not in [key.lower() for key in donors_info.keys()]:
-        donors_info[full_name.title()] = []
     while True:
-        donation_amount = input("Enter donation amount: ")
+        donation_amount = input("Enter donation amount or [B] to go back: ")
+        if donation_amount == 'b':
+            return
         try:
-            donation_amount = int(donation_amount)
+            donation_amount = float(donation_amount)
             if donation_amount < 0:
                 clear_screen()
                 print("Please enter a positive donation amount.")
                 continue
+            if full_name not in [key.lower() for key in donors_info.keys()]:
+                donors_info[full_name.title()] = []
             donors_info[full_name.title()].append(
                 donation_amount)
             print('Added ${1} to {0}\'s donation history.'.format(
@@ -93,7 +95,7 @@ def add_new_or_update_donor_info(full_name):  # pragma no cover
                                                  .title()][-1]))
 
 
-def create_report(donors_info):  # pragma no cover
+def create_report(donors_info):
     """Make a list for each column from dict data then populate
 
     row data into a table.
@@ -129,15 +131,15 @@ def create_report(donors_info):  # pragma no cover
     print('\n')
 
 
-def main():  # pragma no cover
+def main():
     """The main function."""
     while True:
         user_menu = input(
-            """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:
-        [E] to EMAIL an existing donor or new donor.
-        [R] for REPORT of donors and their donations.
-        [Q] to quit the program.
-        > """)
+            """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:\n
+[E] to EMAIL an existing donor or new donor.
+[R] for REPORT of donors and their donations.
+[Q] to quit the program.
+> """)
         if user_menu.lower() == 'q':
             break
         elif user_menu.lower() == 'e':
@@ -148,5 +150,5 @@ def main():  # pragma no cover
             continue
 
 
-if __name__ == '__main__':  # pragma no cover
+if __name__ == '__main__':
     main()

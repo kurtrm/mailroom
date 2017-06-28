@@ -1,6 +1,5 @@
 """Modified versions of mailroom functions for testing."""
 
-
 donors_info = {
     'Sam Wippy': [100000],
     'Willy Wonka': [12, 13, 14],
@@ -18,8 +17,9 @@ def add_new_or_update_donor_info(full_name, test_var):
         donors_info[full_name.title()] = []
         donation_amount = test_var
         try:
-            # import pdb; pdb.set_trace()
-            donation_amount = int(donation_amount)
+            donation_amount = float(donation_amount)
+            if donation_amount < 0:
+                return "Please enter a positive donation amount."
             donors_info[full_name.title()].append(
                 donation_amount)
         except ValueError:
@@ -32,14 +32,14 @@ def create_report(donors_info):
     """Make a list for each column from dict data then populate
     row data into a table.
     """
-    donor_name = list(donors_info.keys())
-    donation = donors_info.values()
-    num_of_donation = [len(a) for a in donation]
-    total_donation = [sum(a) for a in donation]
-    average_donation = [int(sum(a) / len(a)) for a in donation]
+    donor_names = list(donors_info.keys())
+    donations = donors_info.values()
+    num_of_donations = [len(total) for total in donations]
+    total_donations = [sum(total) for total in donations]
+    average_donation = [int(sum(a) / len(a)) for a in donations]
     sorted_donations = sorted(list(zip(
-        donor_name,
-        total_donation,
-        num_of_donation,
+        donor_names,
+        total_donations,
+        num_of_donations,
         average_donation)), key=lambda tup: tup[1], reverse=True)
     return sorted_donations

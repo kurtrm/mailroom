@@ -38,3 +38,9 @@ def test_add_new_or_update_donor_info_fail():
     """Test parts of this function."""
     from mailroom_tests import add_new_or_update_donor_info
     assert add_new_or_update_donor_info("jeepers", "Cool Whip") is None
+
+
+def test_add_new_or_update_donor_info_negative_number():
+    """Ensure we can't pass in a negative number."""
+    from mailroom_tests import add_new_or_update_donor_info
+    assert add_new_or_update_donor_info("Willy Boo", -200)
