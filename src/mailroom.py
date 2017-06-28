@@ -19,13 +19,12 @@ def send_thank_you():
     """Give user choices to send a thank you note to a donor."""
     clear_screen()
     while True:
-        # clear_screen()
-        full_name = input(
-            """Enter the full name of the person you'd like to send a thank you to. Or:
-        [L] to see a list of previous donors.
-        [B] 'back' to return to the main menu.
-        [Q] to quit the program.
-        > """).lower()
+        full_name = input("""
+Enter the full name of the person you'd like to send a thank you to. Or:
+[L] to see a list of previous donors.
+[B] to return to the main menu.
+[Q] to quit the program.
+> """).lower()
         if full_name == 'q':
             sys.exit()
         elif full_name == 'b':
@@ -34,18 +33,24 @@ def send_thank_you():
             for key in sorted(donors_info.keys()):
                 print(key)
         else:
-            full_name_not_in_list(full_name)
+            add_new_or_update_donor_info(full_name)
 
 
-def full_name_not_in_list(full_name):
+def add_new_or_update_donor_info(full_name):
     """Take care of managing user input into our data table."""
     clear_screen()
-    if full_name not in [key.lower() for key in donors_info.keys()]:
-        donors_info[full_name.title()] = []
     while True:
-        donation_amount = input("Enter donation amount: ")
+        donation_amount = input("Enter donation amount or [B] to go back: ")
+        if donation_amount == 'b':
+            return
         try:
-            donation_amount = int(donation_amount)
+            donation_amount = float(donation_amount)
+            if donation_amount < 0:
+                clear_screen()
+                print("Please enter a positive donation amount.")
+                continue
+            if full_name not in [key.lower() for key in donors_info.keys()]:
+                donors_info[full_name.title()] = []
             donors_info[full_name.title()].append(
                 donation_amount)
             print('Added ${1} to {0}\'s donation history.'.format(
@@ -53,31 +58,46 @@ def full_name_not_in_list(full_name):
             break
         except ValueError:
             clear_screen()
-            print("Please enter a valid, numerical donation amount.")
+            print("Please enter a positive, numerical donation amount.")
             continue
-    print("""==================================
-
-    EMAIL BODY:
-
+    print("""
+    ==================================
 
     Dear {name},
 
-    Thank you for your generous donation of ${amount}. We have so many things that we have to do better... and certainly ipsum is one of them. Lorem Ispum is a choke artist. It chokes! I think my strongest asset maybe by far is my temperament. I have a placeholding temperament.
+    Thank you for your generous donation of ${amount}. We have so many things
+    that we have to do better... and certainly ipsum is one of them.
+    Lorem Ispum is a choke artist. It chokes! I think my strongest asset maybe
+    by far is my temperament. I have a placeholding temperament.
 
-    Your donation of ${amount} goes toward accomplishing really cool shit at this place. Lorem Ipsum is the single greatest threat. We are not - we are not keeping up with other websites. When other websites give you text, they’re not sending the best. They’re not sending you, they’re sending words that have lots of problems and they’re bringing those problems with us. They’re bringing mistakes. They’re bringing misspellings.
+    Your donation of ${amount} goes toward accomplishing really cool shit at
+    this place. Lorem Ipsum is the single greatest threat.
+    We are not - we are not keeping up with other websites. When other websites
+    give you text, they’re not sending the best. They’re not sending you,
+    they’re sending words that have lots of problems and they’re bringing
+    those problems with us. They’re bringing mistakes.
+    They’re bringing misspellings.
 
-    {name}, they’re typists… And some, I assume, are good words. An ‘extremely credible source’ has called my office and told me that Barack Obama’s placeholder text is a fraud. I think the only difference between me and the other placeholder text is that I’m more honest and my words are more beautiful. If Trump Ipsum weren’t my own words, perhaps I’d be dating it.
+    {name}, they’re typists… And some, I assume, are good words.
+    An ‘extremely credible source’ has called my office and told me that Barack
+    Obama’s placeholder text is a fraud. I think the only difference between
+    me and the other placeholder text is that I’m more honest and my words are
+    more beautiful. If Trump Ipsum weren’t my own words, perhaps I’d be dating
+    it.
 
     Sincerely,
 
 
     The Pants Foundation
 
-    ==================================""".format(name=full_name.title(), amount=donors_info[full_name.title()][-1]))
+    ==================================""".format(name=full_name.title(),
+                                                 amount=donors_info[full_name
+                                                 .title()][-1]))
 
 
 def create_report(donors_info):
     """Make a list for each column from dict data then populate
+
     row data into a table.
     """
     donor_name = list(donors_info.keys())
@@ -111,14 +131,15 @@ def create_report(donors_info):
     print('\n')
 
 
-if __name__ == '__main__':
+def main():
+    """The main function."""
     while True:
         user_menu = input(
-            """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:
-        [E] to EMAIL an existing donor or new donor.
-        [R] for REPORT of donors and their donations.
-        [Q] to quit the program.
-        > """)
+            """Welcome to the Mailroom-Tron 3000 v1.5. Type your user selection:\n
+[E] to EMAIL an existing donor or new donor.
+[R] for REPORT of donors and their donations.
+[Q] to quit the program.
+> """)
         if user_menu.lower() == 'q':
             break
         elif user_menu.lower() == 'e':
@@ -127,3 +148,7 @@ if __name__ == '__main__':
         elif user_menu.lower() == 'r':
             create_report(donors_info)
             continue
+
+
+if __name__ == '__main__':
+    main()

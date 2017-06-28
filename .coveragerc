@@ -1,0 +1,7 @@
+[run]
+source = src
+omit = 
+    src/mailroom.py
+    src/test_mailroom.py
+[report]
+show_missing = True
